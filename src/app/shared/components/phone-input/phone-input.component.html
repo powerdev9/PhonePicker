@@ -1,0 +1,37 @@
+<div class="phone-input">
+  <p-dropdown
+    [options]="countries | async"
+    [(ngModel)]="selectedCountry"
+    [disabled]="disabled"
+    optionLabel="name"
+    [style]="{ 'width': '70px' }"
+   >
+    <ng-template
+      let-item
+      pTemplate="selectedItem">
+        + {{ item.value.callingCode }}
+    </ng-template>
+    <ng-template let-item pTemplate="item">
+      <span [ngClass]="item.value.flag"></span>
+      {{ item.value.name }}
+    </ng-template>
+  </p-dropdown>
+  <div class="ui-inputgroup">
+    <input
+      class="phone-number"
+      [(ngModel)]="phoneNumber"
+      pInputText
+      [readOnly]="disabled"
+      (ngModelChange)="onPhoneNumberChange($event)"
+    />
+    <button
+      pButton
+      type="button"
+      icon="icon ion-md-call"
+      label="Call"
+      class="btn-dial ui-button-raised ui-button-rounded ui-button-info"
+      [disabled]="this.invalid"
+      (click)="call($event)">
+    </button>
+  </div>
+</div>
